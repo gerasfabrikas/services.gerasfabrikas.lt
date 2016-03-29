@@ -1,4 +1,0 @@
-services:
-#    gf.example:
-#        class: GFBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
