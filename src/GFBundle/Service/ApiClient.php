@@ -9,17 +9,16 @@ require_once dirname(dirname(__FILE__)) . '/lib/libphutil/src/__phutil_library_i
  */
 class ApiClient
 {
-    const API_TOKEN = "api-qeqev5vdaw4pmfea73lbsmyljkky";
     /** @var \ConduitClient */
     private $client;
 
     /**
-     * constructor
+     * @param string $apiToken
      */
-    public function __construct()
+    public function __construct($apiToken)
     {
         $this->client = new \ConduitClient('http://mano.gerasfabrikas.lt/');
-        $this->client->setConduitToken(self::API_TOKEN);
+        $this->client->setConduitToken($apiToken);
     }
 
     /**
@@ -32,6 +31,38 @@ class ApiClient
         $parameters = array(
             'status' => 'status-resolved',
             'limit' => $limit,
+        );
+
+        return $this->client->callMethodSynchronous('maniphest.query', $parameters);
+    }
+
+    /**
+     * @return array
+     */
+    public function getOpenProjects()
+    {
+        $parameters = array(
+            'status' => 'status-open'
+        );
+
+        return $this->client->callMethodSynchronous('project.query', $parameters);
+    }
+
+    /**
+     * @return array
+     */
+    public function getUsers()
+    {
+        return $this->client->callMethodSynchronous('user.query', []);
+    }
+
+    /**
+     * @return array
+     */
+    public function getTasks()
+    {
+        $parameters = array(
+            'limit' => 25,
         );
 
         return $this->client->callMethodSynchronous('maniphest.query', $parameters);

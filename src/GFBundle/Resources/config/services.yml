@@ -1,0 +1,8 @@
+parameters:
+#    parameter_name: value
+
+services:
+    gf.api_client:
+        class: GFBundle\Service\ApiClient
+        arguments:    ['%gf.api.token%']
+
