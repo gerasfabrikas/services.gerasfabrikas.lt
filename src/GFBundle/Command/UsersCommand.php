@@ -2,15 +2,17 @@
 
 namespace GFBundle\Command;
 
-require_once dirname(dirname(__FILE__)) . '/lib/libphutil/src/__phutil_library_init__.php';
+use GFBundle\Entity\User;
 
-use GFBundle\Service\ApiClient;
-
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class UsersCommand extends ContainerAwareCommand
+/**
+ * Class UsersCommand
+ *
+ * @package GFBundle\Command
+ */
+class UsersCommand extends ApiCommand
 {
     protected function configure()
     {
@@ -21,9 +23,7 @@ class UsersCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //$output->writeln('Command result.');
-        /** @var ApiClient $apiClient */
-        $apiClient = $this->getContainer()->get('gf.api_client');
+        $apiClient = $this->getApiClient();
 
         print_r($apiClient->getUsers());
     }
