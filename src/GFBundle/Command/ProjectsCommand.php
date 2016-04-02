@@ -36,15 +36,15 @@ class ProjectsCommand extends ApiCommand
         $repository = $this->getDoctrine()->getRepository('GFBundle:Project');
         $count = 0;
 
-        foreach ($projects['data'] as $projectData) {
+        foreach ($projects['data'] as $data) {
 
-            if ($repository->findOneBy(['phid' => $projectData['phid']])) {
+            if ($repository->findOneBy(['phid' => $data['phid']])) {
                 continue;
             }
 
             $project = new Project();
-            $project->setPhid($projectData['phid']);
-            $project->setName($projectData['name']);
+            $project->setPhid($data['phid']);
+            $project->setName($data['name']);
 
             $em->persist($project);
             $count++;
