@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Task
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="phid", type="string", length=64, nullable=false)
@@ -29,7 +38,7 @@ class Task
     /**
      * @var string
      *
-     * @ORM\Column(name="owner", type="string", length=64, nullable=false)
+     * @ORM\Column(name="owner", type="string", length=64, nullable=true)
      */
     private $owner;
 
@@ -41,16 +50,16 @@ class Task
     private $status;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="title", type="integer", nullable=false)
+     * @ORM\Column(name="title", type="string", length=64, nullable=false)
      */
     private $title;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="description", type="integer", nullable=false)
+     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      */
     private $description;
 
@@ -68,16 +77,17 @@ class Task
      */
     private $datemodified;
 
+
+
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $id;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set phid
@@ -178,7 +188,7 @@ class Task
     /**
      * Set title
      *
-     * @param integer $title
+     * @param string $title
      *
      * @return Task
      */
@@ -192,7 +202,7 @@ class Task
     /**
      * Get title
      *
-     * @return integer
+     * @return string
      */
     public function getTitle()
     {
@@ -202,7 +212,7 @@ class Task
     /**
      * Set description
      *
-     * @param integer $description
+     * @param string $description
      *
      * @return Task
      */
@@ -216,7 +226,7 @@ class Task
     /**
      * Get description
      *
-     * @return integer
+     * @return string
      */
     public function getDescription()
     {
@@ -269,15 +279,5 @@ class Task
     public function getDatemodified()
     {
         return $this->datemodified;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }
