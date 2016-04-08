@@ -5,12 +5,12 @@ namespace GFBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TaskCategory
+ * Category
  *
- * @ORM\Table(name="task_category")
+ * @ORM\Table(name="category")
  * @ORM\Entity
  */
-class TaskCategory
+class Category
 {
     /**
      * @var integer
@@ -24,9 +24,9 @@ class TaskCategory
     /**
      * @var string
      *
-     * @ORM\Column(name="category", type="string", length=64, nullable=false)
+     * @ORM\Column(name="reference", type="string", length=64, nullable=false)
      */
-    private $category;
+    private $reference;
 
     /**
      * @var string
@@ -48,27 +48,27 @@ class TaskCategory
     }
 
     /**
-     * Set category
+     * Set reference
      *
-     * @param string $category
+     * @param string $reference
      *
-     * @return TaskCategory
+     * @return Category
      */
-    public function setCategory($category)
+    public function setReference($reference)
     {
-        $this->category = $category;
+        $this->reference = $reference;
 
         return $this;
     }
 
     /**
-     * Get category
+     * Get reference
      *
      * @return string
      */
-    public function getCategory()
+    public function getReference()
     {
-        return $this->category;
+        return $this->reference;
     }
 
     /**
@@ -76,7 +76,7 @@ class TaskCategory
      *
      * @param string $name
      *
-     * @return TaskCategory
+     * @return Category
      */
     public function setName($name)
     {

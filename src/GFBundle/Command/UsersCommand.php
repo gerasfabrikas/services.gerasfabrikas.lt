@@ -37,10 +37,9 @@ class UsersCommand extends ApiCommand
 
             $user = new User();
             $user->setPhid($data['phid']);
-            $user->setUsername($data['userName']);
-            $user->setRealname($data['realName']);
+            $user->setUserName($data['userName']);
+            $user->setRealName($data['realName']);
             $user->setImage($data['image']);
-            $user->setCompany('');
 
             $em->persist($user);
             $count++;

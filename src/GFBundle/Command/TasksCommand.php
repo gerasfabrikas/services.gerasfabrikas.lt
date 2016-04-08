@@ -9,6 +9,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class TasksCommand extends ApiCommand
 {
+    /** @var array */
+    private $categories = null;
+
+
     protected function configure()
     {
         $this
@@ -28,7 +32,7 @@ class TasksCommand extends ApiCommand
             if (null === ($task = $repository->findOneBy(['phid' => $data['phid']]))) {
                 $task = new Task();
                 $task->setPhid($data['phid']);
-                $task->setTaskid($data['id']);
+                $task->setTaskId($data['id']);
             }
 
             if (!empty($data['projectPHIDs'][0])) {
@@ -44,15 +48,16 @@ class TasksCommand extends ApiCommand
             }
 
             if (!empty($data['auxiliary']['std:maniphest:gerasfabrikas:job-category'])) {
-                $task->setCategory($data['auxiliary']['std:maniphest:gerasfabrikas:job-category']);
+                $categoryId = $this->getCategoryByReference($data['auxiliary']['std:maniphest:gerasfabrikas:job-category']);
+                $task->setCategoryId($categoryId);
             }
 
             $task->setAuthor($data['authorPHID']);
             $task->setStatus($data['status']);
             $task->setTitle($data['title']);
             $task->setDescription($data['description']);
-            $task->setDatecreated($data['dateCreated']);
-            $task->setDatemodified($data['dateModified']);
+            $task->setDateCreated($data['dateCreated']);
+            $task->setDateModified($data['dateModified']);
 
             $em->persist($task);
             $count++;
@@ -60,6 +65,36 @@ class TasksCommand extends ApiCommand
 
         $em->flush();
         $output->writeln(sprintf('%d saved.', $count));
+    }
+
+    /**
+     * @param string $reference
+     *
+     * @return string
+     */
+    private function getCategoryByReference($reference)
+    {
+        if (!isset($this->categories)) {
+            $this->categories = $this->getCategories();
+        }
+
+        return isset($this->categories[$reference]) ? $this->categories[$reference] : '';
+    }
+
+    /**
+     * @return array
+     */
+    private function getCategories()
+    {
+        $result = [];
+        $repository = $this->getDoctrine()->getRepository('GFBundle:Category');
+        $data = $repository->findAll();
+
+        foreach ($data as $category) {
+            $result[$category->getReference()] = $category->getId();
+        }
+
+        return $result;
     }
 
 }

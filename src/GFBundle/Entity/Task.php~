@@ -24,9 +24,9 @@ class Task
     /**
      * @var integer
      *
-     * @ORM\Column(name="taskId", type="integer", nullable=false)
+     * @ORM\Column(name="task_id", type="integer", nullable=false)
      */
-    private $taskid;
+    private $taskId;
 
     /**
      * @var string
@@ -85,25 +85,25 @@ class Task
     private $hours = '0';
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="category", type="string", length=64, nullable=true)
+     * @ORM\Column(name="category_id", type="integer", nullable=true)
      */
-    private $category;
+    private $categoryId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="dateCreated", type="integer", nullable=false)
+     * @ORM\Column(name="date_created", type="integer", nullable=false)
      */
-    private $datecreated;
+    private $dateCreated;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="dateModified", type="integer", nullable=false)
+     * @ORM\Column(name="date_modified", type="integer", nullable=false)
      */
-    private $datemodified;
+    private $dateModified;
 
 
 }

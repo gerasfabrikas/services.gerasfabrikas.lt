@@ -1,0 +1,47 @@
+<?php
+
+namespace GFBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CompanyStatsByCategory
+ *
+ * @ORM\Table(name="company_stats_by_category")
+ * @ORM\Entity
+ */
+class CompanyStatsByCategory
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="company_id", type="integer", nullable=false)
+     */
+    private $companyId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="hours", type="integer", nullable=false)
+     */
+    private $hours;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="category_id", type="integer", nullable=false)
+     */
+    private $categoryId;
+
+
+}
+

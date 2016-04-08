@@ -24,47 +24,52 @@ class StatsCommand extends ApiCommand
     {
         $this->conn = $this->getDoctrine()->getConnection();
 
-        $output->writeln('User stats by category...');
-        $this->statsByCategory();
+        $output->write('User stats by category... ');
+        $this->userStatsByCategory();
         $output->writeln('Done');
 
-        $output->writeln('User stats by project...');
-        $this->statsByProject();
+        $output->write('User stats by project... ');
+        $this->userStatsByProject();
+        $output->writeln('Done');
+
+        $output->write('Company stats by category... ');
+        $this->companyStatsByCategory();
+        $output->writeln('Done');
+
+        $output->write('Company stats by project... ');
+        $this->companyStatsByProject();
         $output->writeln('Done');
     }
 
     /**
      * @throws \Doctrine\DBAL\DBALException
      */
-    private function statsByCategory()
+    private function userStatsByCategory()
     {
         $this->conn->query('TRUNCATE `user_stats_by_category`');
         $query =
-            'INSERT INTO `user_stats_by_category` (userId, hours, categoryId)
+            'INSERT INTO `user_stats_by_category` (user_id, hours, category_id)
                     SELECT u.id,
                            SUM(t.hours) AS hours,
-                           tc.id
+                           t.category_id
                     FROM `task` t
                     INNER JOIN `user` u
                         ON u.phid = t.owner
-                    INNER JOIN task_category tc
-                        ON tc.category = t.category
                     WHERE t.`status` = "resolved"
                     GROUP BY u.id,
-                             tc.id';
+                             t.category_id';
 
         $this->conn->query($query);
-
     }
 
     /**
      * @throws \Doctrine\DBAL\DBALException
      */
-    private function statsByProject()
+    private function userStatsByProject()
     {
         $this->conn->query('TRUNCATE `user_stats_by_project`');
         $query =
-            'INSERT INTO `user_stats_by_project` (userId, hours, projectId)
+            'INSERT INTO `user_stats_by_project` (user_id, hours, project_id)
                     SELECT u.id,
                            SUM(t.hours) AS hours,
                            p.id
@@ -75,6 +80,50 @@ class StatsCommand extends ApiCommand
                         ON p.phid = t.project
                     WHERE t.`status` = "resolved"
                     GROUP BY u.id,
+                             p.id';
+
+        $this->conn->query($query);
+    }
+
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    private function companyStatsByCategory()
+    {
+        $this->conn->query('TRUNCATE `company_stats_by_category`');
+        $query =
+            'INSERT INTO `company_stats_by_category` (company_id, hours, category_id)
+                    SELECT u.company_id,
+                           SUM(t.hours) AS hours,
+                           t.category_id
+                    FROM `task` t
+                    INNER JOIN `user` u
+                        ON u.phid = t.owner AND u.company_id IS NOT NULL
+                    WHERE t.`status` = "resolved"
+                    GROUP BY u.company_id,
+                             t.category_id';
+
+        $this->conn->query($query);
+    }
+
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    private function companyStatsByProject()
+    {
+        $this->conn->query('TRUNCATE `company_stats_by_project`');
+        $query =
+            'INSERT INTO `company_stats_by_project` (company_id, hours, project_id)
+                    SELECT u.company_id,
+                           SUM(t.hours) AS hours,
+                           p.id
+                    FROM `task` t
+                    INNER JOIN `user` u
+                        ON u.phid = t.owner AND u.company_id IS NOT NULL
+                    INNER JOIN project p
+                        ON p.phid = t.project
+                    WHERE t.`status` = "resolved"
+                    GROUP BY u.company_id,
                              p.id';
 
         $this->conn->query($query);

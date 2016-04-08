@@ -24,9 +24,9 @@ class Task
     /**
      * @var integer
      *
-     * @ORM\Column(name="taskId", type="integer", nullable=false)
+     * @ORM\Column(name="task_id", type="integer", nullable=false)
      */
-    private $taskid;
+    private $taskId;
 
     /**
      * @var string
@@ -85,25 +85,25 @@ class Task
     private $hours = '0';
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="category", type="string", length=64, nullable=true)
+     * @ORM\Column(name="category_id", type="integer", nullable=true)
      */
-    private $category;
+    private $categoryId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="dateCreated", type="integer", nullable=false)
+     * @ORM\Column(name="date_created", type="integer", nullable=false)
      */
-    private $datecreated;
+    private $dateCreated;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="dateModified", type="integer", nullable=false)
+     * @ORM\Column(name="date_modified", type="integer", nullable=false)
      */
-    private $datemodified;
+    private $dateModified;
 
 
 
@@ -118,27 +118,27 @@ class Task
     }
 
     /**
-     * Set taskid
+     * Set taskId
      *
-     * @param integer $taskid
+     * @param integer $taskId
      *
      * @return Task
      */
-    public function setTaskid($taskid)
+    public function setTaskId($taskId)
     {
-        $this->taskid = $taskid;
+        $this->taskId = $taskId;
 
         return $this;
     }
 
     /**
-     * Get taskid
+     * Get taskId
      *
      * @return integer
      */
-    public function getTaskid()
+    public function getTaskId()
     {
-        return $this->taskid;
+        return $this->taskId;
     }
 
     /**
@@ -334,74 +334,74 @@ class Task
     }
 
     /**
-     * Set category
+     * Set categoryId
      *
-     * @param string $category
+     * @param integer $categoryId
      *
      * @return Task
      */
-    public function setCategory($category)
+    public function setCategoryId($categoryId)
     {
-        $this->category = $category;
+        $this->categoryId = $categoryId;
 
         return $this;
     }
 
     /**
-     * Get category
-     *
-     * @return string
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * Set datecreated
-     *
-     * @param integer $datecreated
-     *
-     * @return Task
-     */
-    public function setDatecreated($datecreated)
-    {
-        $this->datecreated = $datecreated;
-
-        return $this;
-    }
-
-    /**
-     * Get datecreated
+     * Get categoryId
      *
      * @return integer
      */
-    public function getDatecreated()
+    public function getCategoryId()
     {
-        return $this->datecreated;
+        return $this->categoryId;
     }
 
     /**
-     * Set datemodified
+     * Set dateCreated
      *
-     * @param integer $datemodified
+     * @param integer $dateCreated
      *
      * @return Task
      */
-    public function setDatemodified($datemodified)
+    public function setDateCreated($dateCreated)
     {
-        $this->datemodified = $datemodified;
+        $this->dateCreated = $dateCreated;
 
         return $this;
     }
 
     /**
-     * Get datemodified
+     * Get dateCreated
      *
      * @return integer
      */
-    public function getDatemodified()
+    public function getDateCreated()
     {
-        return $this->datemodified;
+        return $this->dateCreated;
+    }
+
+    /**
+     * Set dateModified
+     *
+     * @param integer $dateModified
+     *
+     * @return Task
+     */
+    public function setDateModified($dateModified)
+    {
+        $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    /**
+     * Get dateModified
+     *
+     * @return integer
+     */
+    public function getDateModified()
+    {
+        return $this->dateModified;
     }
 }

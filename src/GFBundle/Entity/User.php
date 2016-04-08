@@ -31,16 +31,16 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="userName", type="string", length=64, nullable=false)
+     * @ORM\Column(name="user_name", type="string", length=64, nullable=false)
      */
-    private $username;
+    private $userName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="realName", type="string", length=128, nullable=false)
+     * @ORM\Column(name="real_name", type="string", length=128, nullable=false)
      */
-    private $realname;
+    private $realName;
 
     /**
      * @var string
@@ -50,11 +50,11 @@ class User
     private $image;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="company", type="string", length=128, nullable=false)
+     * @ORM\Column(name="company_id", type="integer", nullable=true)
      */
-    private $company;
+    private $companyId;
 
 
 
@@ -93,51 +93,51 @@ class User
     }
 
     /**
-     * Set username
+     * Set userName
      *
-     * @param string $username
+     * @param string $userName
      *
      * @return User
      */
-    public function setUsername($username)
+    public function setUserName($userName)
     {
-        $this->username = $username;
+        $this->userName = $userName;
 
         return $this;
     }
 
     /**
-     * Get username
+     * Get userName
      *
      * @return string
      */
-    public function getUsername()
+    public function getUserName()
     {
-        return $this->username;
+        return $this->userName;
     }
 
     /**
-     * Set realname
+     * Set realName
      *
-     * @param string $realname
+     * @param string $realName
      *
      * @return User
      */
-    public function setRealname($realname)
+    public function setRealName($realName)
     {
-        $this->realname = $realname;
+        $this->realName = $realName;
 
         return $this;
     }
 
     /**
-     * Get realname
+     * Get realName
      *
      * @return string
      */
-    public function getRealname()
+    public function getRealName()
     {
-        return $this->realname;
+        return $this->realName;
     }
 
     /**
@@ -165,26 +165,26 @@ class User
     }
 
     /**
-     * Set company
+     * Set companyId
      *
-     * @param string $company
+     * @param integer $companyId
      *
      * @return User
      */
-    public function setCompany($company)
+    public function setCompanyId($companyId)
     {
-        $this->company = $company;
+        $this->companyId = $companyId;
 
         return $this;
     }
 
     /**
-     * Get company
+     * Get companyId
      *
-     * @return string
+     * @return integer
      */
-    public function getCompany()
+    public function getCompanyId()
     {
-        return $this->company;
+        return $this->companyId;
     }
 }
