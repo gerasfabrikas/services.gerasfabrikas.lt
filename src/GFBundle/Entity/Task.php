@@ -22,11 +22,25 @@ class Task
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="taskId", type="integer", nullable=false)
+     */
+    private $taskid;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="phid", type="string", length=64, nullable=false)
      */
     private $phid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="project", type="string", length=64, nullable=true)
+     */
+    private $project;
 
     /**
      * @var string
@@ -66,6 +80,20 @@ class Task
     /**
      * @var integer
      *
+     * @ORM\Column(name="hours", type="integer", nullable=false)
+     */
+    private $hours = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="category", type="string", length=64, nullable=true)
+     */
+    private $category;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="dateCreated", type="integer", nullable=false)
      */
     private $datecreated;
@@ -90,6 +118,30 @@ class Task
     }
 
     /**
+     * Set taskid
+     *
+     * @param integer $taskid
+     *
+     * @return Task
+     */
+    public function setTaskid($taskid)
+    {
+        $this->taskid = $taskid;
+
+        return $this;
+    }
+
+    /**
+     * Get taskid
+     *
+     * @return integer
+     */
+    public function getTaskid()
+    {
+        return $this->taskid;
+    }
+
+    /**
      * Set phid
      *
      * @param string $phid
@@ -111,6 +163,30 @@ class Task
     public function getPhid()
     {
         return $this->phid;
+    }
+
+    /**
+     * Set project
+     *
+     * @param string $project
+     *
+     * @return Task
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return string
+     */
+    public function getProject()
+    {
+        return $this->project;
     }
 
     /**
@@ -231,6 +307,54 @@ class Task
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set hours
+     *
+     * @param integer $hours
+     *
+     * @return Task
+     */
+    public function setHours($hours)
+    {
+        $this->hours = $hours;
+
+        return $this;
+    }
+
+    /**
+     * Get hours
+     *
+     * @return integer
+     */
+    public function getHours()
+    {
+        return $this->hours;
+    }
+
+    /**
+     * Set category
+     *
+     * @param string $category
+     *
+     * @return Task
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 
     /**

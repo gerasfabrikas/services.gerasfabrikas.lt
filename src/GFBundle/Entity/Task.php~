@@ -22,11 +22,25 @@ class Task
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="taskId", type="integer", nullable=false)
+     */
+    private $taskid;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="phid", type="string", length=64, nullable=false)
      */
     private $phid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="project", type="string", length=64, nullable=true)
+     */
+    private $project;
 
     /**
      * @var string
@@ -62,6 +76,20 @@ class Task
      * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      */
     private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="hours", type="integer", nullable=false)
+     */
+    private $hours = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="category", type="string", length=64, nullable=true)
+     */
+    private $category;
 
     /**
      * @var integer

@@ -28,12 +28,26 @@ class TasksCommand extends ApiCommand
             if (null === ($task = $repository->findOneBy(['phid' => $data['phid']]))) {
                 $task = new Task();
                 $task->setPhid($data['phid']);
+                $task->setTaskid($data['id']);
             }
 
-            $task->setAuthor($data['authorPHID']);
+            if (!empty($data['projectPHIDs'][0])) {
+                $task->setProject($data['projectPHIDs'][0]);
+            }
+
             if (!empty($data['ownerPHID'])) {
                 $task->setOwner($data['ownerPHID']);
             }
+
+            if (!empty($data['auxiliary']['std:maniphest:gerasfabrikas:actual-hours'])) {
+                $task->setHours($data['auxiliary']['std:maniphest:gerasfabrikas:actual-hours']);
+            }
+
+            if (!empty($data['auxiliary']['std:maniphest:gerasfabrikas:job-category'])) {
+                $task->setCategory($data['auxiliary']['std:maniphest:gerasfabrikas:job-category']);
+            }
+
+            $task->setAuthor($data['authorPHID']);
             $task->setStatus($data['status']);
             $task->setTitle($data['title']);
             $task->setDescription($data['description']);

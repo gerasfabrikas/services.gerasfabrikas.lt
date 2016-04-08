@@ -22,21 +22,6 @@ class ApiClient
     }
 
     /**
-     * @param int $limit
-     *
-     * @return array
-     */
-    public function getRecentlyResolvedTasks($limit = 10)
-    {
-        $parameters = array(
-            'status' => 'status-resolved',
-            'limit' => $limit,
-        );
-
-        return $this->client->callMethodSynchronous('maniphest.query', $parameters);
-    }
-
-    /**
      * @return array
      */
     public function getOpenProjects()
@@ -57,12 +42,15 @@ class ApiClient
     }
 
     /**
+     * @param int $limit
+     *
      * @return array
      */
-    public function getTasks()
+    public function getTasks($limit = 100)
     {
         $parameters = array(
-            'limit' => 25,
+            'limit' => $limit,
+            'order' => 'order-modified'
         );
 
         return $this->client->callMethodSynchronous('maniphest.query', $parameters);
