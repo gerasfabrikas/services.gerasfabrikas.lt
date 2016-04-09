@@ -1,6 +1,7 @@
 /app/config/parameters.yml
 /build/
 /phpunit.xml
+/src/GFBundle/lib/libphutil
 /var/*
 !/var/cache
 /var/cache/*
