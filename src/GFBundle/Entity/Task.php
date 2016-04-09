@@ -66,7 +66,7 @@ class Task
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=64, nullable=false)
+     * @ORM\Column(name="title", type="string", length=128, nullable=false)
      */
     private $title;
 
