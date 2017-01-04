@@ -84,7 +84,7 @@ class SaveStatsCommand extends ApiCommand
      */
     private function writeStatsByProject($stats)
     {
-        $fp = fopen('/var/www/www.gerasfabrikas.lt/stats/category_pie.csv', 'w');
+        $fp = fopen('/var/www/www.gerasfabrikas.lt/stats/project_pie.csv', 'w');
         fputcsv($fp, ['Projektas', 'Valandos']);
         fputcsv($fp, ['string', 'number']);
         foreach ($stats as $row) {
