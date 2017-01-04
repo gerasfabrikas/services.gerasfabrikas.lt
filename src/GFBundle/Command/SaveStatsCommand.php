@@ -76,7 +76,7 @@ class SaveStatsCommand extends ApiCommand
                   WHERE t.`status` = "resolved"
                   GROUP BY p.name';
 
-        $this->conn->fetchAll($query);
+        return $this->conn->fetchAll($query);
     }
 
     /**
